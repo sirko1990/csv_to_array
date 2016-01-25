@@ -1,10 +1,8 @@
 The extension is being tested
 
-## Why it is need? 
+## Why do we need it?
 
-Let's say you have csv file wich has many elements on line which  need to convert it whole on array
-But you need only few columns from this file
-So you can try to use this PHP extension
+Let's say you have csv file with many columns and you need it to be converted into an array. Although you need only a few columns from this file. So try to use this PHP extension
 
 ## Example
 - we have test file
