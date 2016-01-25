@@ -13,6 +13,7 @@ So you can try to use this PHP extension
 ```
 $ php -d extension=csvtoarray.so -r "print_r(get_array_from_csv('/var/www/viewer/test_file/test.csv', array(2,5,7), ','));"
 ```
+- 'get_array_from_csv' - it is name of function
 - first param - it is path to file
 - second param - it is array which has column's numbers which we need to have in array, 
 - third param - it is delimiter
