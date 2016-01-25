@@ -7,6 +7,8 @@ So you can try to use this PHP extension
 ## Example
 
 ## How to install
+- Go to repository directory
+- Run next command
 ```
 $ phpize
 $ ./configure
