@@ -1,8 +1,0 @@
-viewer.lo: /home/kuzka/viewer/viewer.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/home/kuzka/viewer $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /home/kuzka/viewer/viewer.c -o viewer.lo 
-$(phplibdir)/viewer.la: ./viewer.la
-	$(LIBTOOL) --mode=install cp ./viewer.la $(phplibdir)
-
-./viewer.la: $(shared_objects_viewer) $(VIEWER_SHARED_DEPENDENCIES)
-	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_viewer) $(VIEWER_SHARED_LIBADD)
-
