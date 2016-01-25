@@ -7,7 +7,13 @@ So you can try to use this PHP extension
 ## Example
 - we have test file
 ![alt tag] (http://i.imgur.com/4HY41KR.png)
-
+- after that we had installed it, make test
+```
+$ php -d extension=csvtoarray.so -r "print_r(get_array_from_csv('/var/www/viewer/test_file/test.csv', array(2,5,7), ','));"
+```
+where first param it is path to file
+second - it is array which has column's numbers which we need to have in array
+third - it is delimiter
 
 ## How to install
 - Go to repository directory
