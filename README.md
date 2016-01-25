@@ -2,7 +2,7 @@ The extension is being tested
 
 ## Why do we need it?
 
-Let's say you have csv file with many columns and you need it to be converted into an array. Although you need only a few columns from this file. So try to use this PHP extension
+Let's say there is a test file with many columns and you need it to be converted into an array. Although you need only a few columns from this file. So try to use this PHP extension
 
 ## Example
 - we have test file
