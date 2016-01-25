@@ -5,6 +5,9 @@ But you need only few columns from this file
 So you can try to use this PHP extension
 
 ## Example
+- we have test file
+![alt tag] (http://i.imgur.com/4HY41KR.png)
+
 
 ## How to install
 - Go to repository directory
