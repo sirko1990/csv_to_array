@@ -17,7 +17,8 @@ $ php -d extension=csvtoarray.so -r "print_r(get_array_from_csv('/var/www/viewer
 - second param - it is array which has column's numbers which we need to have in array, 
 - third param - it is delimiter
 
-Result: 
+Result
+
 ![alt tag] (http://i.imgur.com/AGJL24U.png)
 
 ## How to install
