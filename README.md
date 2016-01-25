@@ -22,7 +22,7 @@ Result
 ![alt tag] (http://i.imgur.com/AGJL24U.png)
 
 ## How to install
-- Go to repository directory
+- Go to the repository directory
 - Run next commands
 ```
 $ phpize
