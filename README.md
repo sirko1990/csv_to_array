@@ -1,4 +1,5 @@
 The extension is in the process of testing
+Was tested on php-5.3..5.5.9
 
 ## Why do we need it?
 
@@ -7,7 +8,7 @@ Let's say there is a test file with many columns and you need it to be converted
 ## Example
 - we have test file
 ![alt tag] (http://i.imgur.com/4HY41KR.png)
-- after the test file has beеn installed you can test it
+- when the test file has beеn installed you can test it
 ```
 $ php -d extension=csvtoarray.so -r "print_r(get_array_from_csv('/var/www/viewer/test_file/test.csv', array(2,5,7), ','));"
 ```
@@ -22,7 +23,7 @@ Result
 
 ## How to install
 - Go to repository directory
-- Run next command
+- Run next commands
 ```
 $ phpize
 $ ./configure
