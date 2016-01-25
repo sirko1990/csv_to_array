@@ -1,5 +1,5 @@
 The extension is in the process of testing.
-It has been tested already on php-5.3..php-5.5.9
+It has been tested in php-5.3..php-5.5.9
 
 ## Why do we need it?
 
