@@ -7,13 +7,13 @@ Let's say you have csv file with many columns and you need it to be converted in
 ## Example
 - we have test file
 ![alt tag] (http://i.imgur.com/4HY41KR.png)
-- after that we had installed it, make test
+- after the test file has beеn installed you can test it
 ```
 $ php -d extension=csvtoarray.so -r "print_r(get_array_from_csv('/var/www/viewer/test_file/test.csv', array(2,5,7), ','));"
 ```
 - 'get_array_from_csv' - it is name of function
 - first param - it is path to file
-- second param - it is array which has column's numbers which we need to have in array, 
+- second param - it is an array with column's numbers which should be in array
 - third param - it is delimiter
 
 Result
