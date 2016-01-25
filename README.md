@@ -1,4 +1,4 @@
-The extension It is being tested
+The extension is being tested
 
 ## Why it is need 
 
