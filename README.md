@@ -2,7 +2,7 @@ The extension is in the process of testing
 
 ## Why do we need it?
 
-Let's say there is a test file with many columns and you need it to be converted into an array. Although you need only a few columns from this file. So try to use this PHP extension
+Let's say there is a test file with many columns and you need it to be converted into an array. Although you need only few columns from this file. So try to use this PHP extension
 
 ## Example
 - we have test file
