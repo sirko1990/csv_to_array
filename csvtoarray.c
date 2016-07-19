@@ -27,41 +27,43 @@ ZEND_GET_MODULE(csvtoarray)
 
 PHP_FUNCTION(get_array_from_csv)
 {
-	char *file_path;
-	int file_path_len;
-	char *delimiter;
-	int delimiter_len;
 	zval* zarr;
+	char *file_path,
+	     *delimiter;
+	int file_path_len,
+	    delimiter_len;
 	
 	// check params
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "sas", &file_path, &file_path_len, &zarr, &delimiter, &delimiter_len) == FAILURE) { 
    		return;
 	}
-	
-	// count params on array param of numbers
-	int count = zend_hash_num_elements(zarr->value.ht);
-	int elements[count];
-	FILE *fp;
-	zval *tmp;
+
+	int count = zend_hash_num_elements(zarr->value.ht),
+        elements[count],
+        step_buffer_length_update = 1,
+        length_element_of_line,
+        is_double_quotes = 0,
+        size = sizeof(char),
+	    numberOfElement = 0,
+	    numberOfLine = 0,
+	    is_match = 0,
+	    j = 0,
+	    c;
+	char* BUFFER = (char*)malloc(size * MIN_BUFFER_SIZE * step_buffer_length_update);
+    FILE *fp;
+    zval *tmp;
 
 	//copy params of zval array to C array
 	parse_array_with_field_numbers(zarr, &elements, count);
 
 	// open file by file path param
 	if ((fp = fopen(file_path,"r")) == NULL) zend_error(E_ERROR, "Cannot read file. Please check file path.\n");
-	
-	// current number elemennt on line
-	int numberOfElement, numberOfLine, is_match, j, is_double_quotes, length_element_of_line, c;
-	int size = sizeof(char);
-	int step_buffer_length_update = 1;
-	char* BUFFER = (char*)malloc(size * MIN_BUFFER_SIZE * step_buffer_length_update);
 
-	// initialisation avariables
-	numberOfLine = numberOfElement = is_match = j = is_double_quotes = 0;
 	array_init(return_value);
 	
 	// get each char element of filr
 	while ((c = getc(fp)) != EOF){
+
 		// if line of file is the end
 		if(c == LINE_END || numberOfLine == 0) {
 			// first line
@@ -77,47 +79,48 @@ PHP_FUNCTION(get_array_from_csv)
 			
 			// Increment to next line
 			numberOfLine++;
-		} else {
-			// check if curren char element is delimiter
-			if(c == *delimiter && is_double_quotes == 0){
-				// add end of string element of line to array
-				if(is_match == 1){
-					//Update buffer
-					BUFFER[j] = '\0';
-					//add to ARRAY NODE
-					add_index_string(tmp, numberOfElement, BUFFER, 1);
-					is_match = 0;
-				}
+			continue;
+		}
 
-				is_double_quotes = 0;
-				numberOfElement++;
-				BUFFER[0] = '\0';
-				j = 0;
-
-				is_element_in_array_data(numberOfElement, elements, count, &is_match);
-
-			//added char to current node of element
-			} else if(is_match) {
-				//check quotes
-				if(c == QUOTES){
-					is_double_quotes = is_double_quotes == 1 ? 0 : 1;
-					continue;
-				}
-				
-				// check is buffer owerflow
-				if(((MIN_BUFFER_SIZE * step_buffer_length_update) - j) < 5){
-					step_buffer_length_update++;
-				    BUFFER = realloc(BUFFER, size * MIN_BUFFER_SIZE);
-				}
-				
-				// add char element to buff
-				BUFFER[j] = c;
-				j++;
-
-			// check first element of line
-			} else if(numberOfElement == 0) {
-            	is_element_in_array_data(numberOfElement, elements, count, &is_match);
+		// check if curren char element is delimiter
+		if(c == *delimiter && is_double_quotes == 0){
+			// add end of string element of line to array
+			if(is_match == 1){
+				//Update buffer
+				BUFFER[j] = '\0';
+				//add to ARRAY NODE
+				add_index_string(tmp, numberOfElement, BUFFER, 1);
+				is_match = 0;
 			}
+
+			is_double_quotes = 0;
+			numberOfElement++;
+			BUFFER[0] = '\0';
+			j = 0;
+
+			is_element_in_array_data(numberOfElement, elements, count, &is_match);
+
+		//added char to current node of element
+		} else if(is_match) {
+			//check quotes
+			if(c == QUOTES){
+				is_double_quotes = is_double_quotes == 1 ? 0 : 1;
+				continue;
+			}
+
+			// check is buffer owerflow
+			if(((MIN_BUFFER_SIZE * step_buffer_length_update) - j) < 5){
+				step_buffer_length_update++;
+			    BUFFER = realloc(BUFFER, size * MIN_BUFFER_SIZE);
+			}
+				
+			// add char element to buff
+			BUFFER[j] = c;
+			j++;
+
+		// check first element of line
+		} else if(numberOfElement == 0) {
+           	is_element_in_array_data(numberOfElement, elements, count, &is_match);
 		}
 	}
 	free(BUFFER);
