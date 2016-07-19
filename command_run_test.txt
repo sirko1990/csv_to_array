@@ -1,1 +1,0 @@
-php -d extension=csvtoarray.so -r "print_r(get_array_from_csv('/var/www/viewer/test_file/test.csv', array(2,5,7), ','));"
